@@ -2,3 +2,4 @@
 /exe
 /main.cpp
 *.exe
+cmake-build-debug
