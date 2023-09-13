@@ -39,16 +39,73 @@ int get(int key) {
     // 如果是头节点
     if (!tempNode->pre) return tempNode->val;
 
-    // 如果是中间节点
-    if ()
+    // 如果是尾节点
+    if (!tempNode->next) {
+        tempNode->pre->next = nullptr;
+        tempNode->pre = nullptr;
 
+        tempNode->next = head->next;
+        head->next->pre = tempNode;
 
+        head->next = tempNode;
+        return tempNode->val;
+    }
 
+    // 中间节点
+    tempNode->pre->next = tempNode->next;
+    tempNode->next->pre = tempNode->pre;
 
+    tempNode->pre = nullptr;
+    tempNode->next = head->next;
+    head->next->pre = tempNode;
+    head->next = tempNode;
+    return tempNode->val;
 }
 
 void put(int key, int value) {
+    // 如果key不存在
+    if (!dict[key]) {
+        ListNode *tempNode = new ListNode(value, nullptr, nullptr);
+        // 如果没有节点
+        if (head->next == nullptr) {
+            head->next = tempNode;
+            return;
+        }
 
+        tempNode->next = head->next;
+        head->next->pre = tempNode;
+        head->next = tempNode;
+        dict[key] = tempNode;
+        return;
+    }
+
+    // 如果key存在
+    ListNode *tempNode = dict[key];
+    tempNode->val = value;
+    // 如果是头节点
+    if (!tempNode->pre) return;
+
+    // 如果是尾节点
+    if (!tempNode->next) {
+        tempNode->pre->next = nullptr;
+        tempNode->pre = nullptr;
+
+        tempNode->next = head->next;
+        head->next->pre = tempNode;
+
+        head->next = tempNode;
+        return;
+    }
+
+    // 中间节点
+    tempNode->pre->next = tempNode->next;
+    tempNode->next->pre = tempNode->pre;
+
+    tempNode->pre = nullptr;
+    tempNode->next = head->next;
+    head->next->pre = tempNode;
+    head->next = tempNode;
+    return;
 }
 
 int main() {
