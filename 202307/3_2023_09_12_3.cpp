@@ -36,12 +36,12 @@ int lengthOfLongestSubstring1(string s) {
 
 
 int lengthOfLongestSubstring2(string s) {
-    vector<int> dict(138,0);
-    int maxPos = 0, ans = 0;
+    vector<int> dict = vector<int>(135, 0);
+    int ans = 0, preMax = 0;
     for (int i = 1; i <= s.size(); ++i) {
-        maxPos = max(maxPos, dict[s[i - 1]]);
+        preMax = max(preMax, dict[s[i - 1]]);
+        ans = max(ans, i - preMax);
         dict[s[i - 1]] = i;
-        ans = max(ans, i - maxPos);
     }
     return ans;
 }
@@ -49,13 +49,13 @@ int lengthOfLongestSubstring2(string s) {
 
 
 int main() {
-    cout << lengthOfLongestSubstring("abcabcbb") << endl;
-    cout << lengthOfLongestSubstring("bbbbb") << endl;
-    cout << lengthOfLongestSubstring("pwwkew") << endl;
-
-    cout << lengthOfLongestSubstring1("abcabcbb") << endl;
-    cout << lengthOfLongestSubstring1("bbbbb") << endl;
-    cout << lengthOfLongestSubstring1("pwwkew") << endl;
+//    cout << lengthOfLongestSubstring("abcabcbb") << endl;
+//    cout << lengthOfLongestSubstring("bbbbb") << endl;
+//    cout << lengthOfLongestSubstring("pwwkew") << endl;
+//
+//    cout << lengthOfLongestSubstring1("abcabcbb") << endl;
+//    cout << lengthOfLongestSubstring1("bbbbb") << endl;
+//    cout << lengthOfLongestSubstring1("pwwkew") << endl;
 
     cout << lengthOfLongestSubstring2("abcabcbb") << endl;
     cout << lengthOfLongestSubstring2("bbbbb") << endl;

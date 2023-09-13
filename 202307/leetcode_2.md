@@ -89,6 +89,12 @@ int lengthOfLongestSubstring2(string s) {
 1. 结尾为索引i的子问题
 
 
+#### 类似题目
+1. [ ] [395 至少有 K 个重复字符的最长子串](https://leetcode.cn/problems/longest-substring-with-at-least-k-repeating-characters/)
+2. [ ] [159 至多包含两个不同字符的最长子串](https://leetcode.cn/problems/longest-substring-with-at-most-two-distinct-characters/description/)
+3. [ ] [340 至多包含K个不同字符的最长子串](https://leetcode.cn/problems/longest-substring-with-at-most-k-distinct-characters/description/)
+4. [ ] [992 K个不同整数的数组](https://leetcode.cn/problems/subarrays-with-k-different-integers/description/)
+
 
 #### 名词解释
 1. [ ] 子串: 字符串某一段连续的序列
