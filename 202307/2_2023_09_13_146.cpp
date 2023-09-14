@@ -14,11 +14,13 @@ const int maxn = 1e5 + 5;
 
 
 struct ListNode {
+    int key;
     int val;
     ListNode *pre;
     ListNode *next;
-    ListNode() {}
-    ListNode(int val, ListNode *pre, ListNode *next) : val(val), pre(pre), next(next) {}
+    ListNode() : pre(nullptr), next(nullptr) {}
+    ListNode(int val) : val(val), pre(nullptr), next(nullptr) {}
+    ListNode(int val, int key, ListNode *pre, ListNode *next) : val(val), key(key), pre(pre), next(next) {}
 };
 
 
@@ -41,6 +43,7 @@ int get(int key) {
 
     // 如果是尾节点
     if (!tempNode->next) {
+        tail->next = tempNode->pre;
         tempNode->pre->next = nullptr;
         tempNode->pre = nullptr;
 
@@ -63,12 +66,16 @@ int get(int key) {
 }
 
 void put(int key, int value) {
+    printf("%d %d\n", key, value);
     // 如果key不存在
     if (!dict[key]) {
-        ListNode *tempNode = new ListNode(value, nullptr, nullptr);
+        ListNode *tempNode = new ListNode(value, key, nullptr, nullptr);
         // 如果没有节点
         if (head->next == nullptr) {
+            tail->next = tempNode;
             head->next = tempNode;
+            ++currentLength;
+            dict[key] = tempNode;
             return;
         }
 
@@ -76,6 +83,15 @@ void put(int key, int value) {
         head->next->pre = tempNode;
         head->next = tempNode;
         dict[key] = tempNode;
+        ++currentLength;
+        if (currentLength > cap) {
+            printf("11: %d %d\n", dict[tail->next->val], tail->next->val);
+            dict.erase(tail->next->key);
+            printf("12: %d\n", dict[tail->next->val]);
+            tail->next = tail->next->pre;
+            tail->next->next = nullptr;
+            --currentLength;
+        }
         return;
     }
 
@@ -87,6 +103,7 @@ void put(int key, int value) {
 
     // 如果是尾节点
     if (!tempNode->next) {
+        tail->next = tempNode->pre;
         tempNode->pre->next = nullptr;
         tempNode->pre = nullptr;
 
@@ -111,3 +128,5 @@ void put(int key, int value) {
 int main() {
 
 }
+
+// 4->3
